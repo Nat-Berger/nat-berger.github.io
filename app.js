@@ -4,6 +4,7 @@ const todoButton = document.querySelector('.todo-button');
 const todoList = document.querySelector('.todo-list');
 const filterOption = document.querySelector('.filter-todo');
 //Event Listeners
+//todoInput.addEventListener('keydown', checkInputLength);
 //todoInput.addEventListener('input', checkInputLength);   //// I wanna limit charactesr to 10, then show live validation
 // on the length so that if they hit 11, it shows, when it hits 10, it hits it again. 
 todoButton.addEventListener("click", addTodo);
@@ -47,11 +48,16 @@ function checkInputLength() {
   let errorMessage = document.getElementById('validationMessage');
   if (todoInput.value.length > 10 || todoInput.value.length < 1) {
     errorMessage.innerHTML = 'Please enter 1 - 100 characters';
+  } else {
+    errorMessage.innerHTML = '';
   }
 }
-
-
-
+function checkKey(event) {
+  // Check for special keys like Command (Meta) + Backspace on macOS
+  if ((event.metaKey || event.ctrlKey) && event.key === 'Backspace') {
+    checkInputLength();
+  }
+}
 
 function deleteCheck(e) {
   const item = e.target;
